@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphqlFederationModule } from './graphql/graphql.module';
+import { GetPaymentsResolver } from './graphql/resolvers/get.payments.resolver';
 // import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
@@ -16,6 +17,6 @@ import { GraphqlFederationModule } from './graphql/graphql.module';
     GraphqlFederationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, GetPaymentsResolver],
 })
 export class AppModule {}

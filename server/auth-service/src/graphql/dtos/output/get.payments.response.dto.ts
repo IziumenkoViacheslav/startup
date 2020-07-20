@@ -22,11 +22,11 @@ export class GetPaymentsResponseDto {
   /**
    * Payments.
    */
-  // @Field(() => [Payment], {
-  //   description: 'Payments.',
-  // })
-  // @IsArray()
-  // @ValidateNested({ each: true })
-  // @Type(() => Payment)
-  // public readonly payments: Payment[];
+  @Field(() => [String], {
+    description: 'Payments.',
+  })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => String)
+  public readonly payments: String[];
 }

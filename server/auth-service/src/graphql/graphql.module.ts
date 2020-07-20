@@ -14,7 +14,7 @@ import { GetPaymentsResolver } from './resolvers/get.payments.resolver';
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => {
         const options: GqlModuleOptions = {
-          typePaths: ['./**/*.gql'],
+          // typePaths: ['./**/*.gql'],
           autoSchemaFile: 'dist/schema.gql', // will be generated
           debug: true,
           tracing: true,
