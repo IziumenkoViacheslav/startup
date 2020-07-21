@@ -6,14 +6,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const configService = app.get(ConfigService);
+  const appName = configService.get('APP_NAME');
   const host = configService.get('HOST');
   const port = configService.get('PORT');
   const version = configService.get('version');
-  const globalPrefix = `${version}/api`;
+  const globalPrefix = `api/${version}`;
   app.setGlobalPrefix(globalPrefix);
 
   await app.listen(port, () => {
-    console.log(`http://${host}:${port}/${globalPrefix}`);
+    console.log(`${appName} docs http://${host}:${port}/${globalPrefix}`);
   });
 }
 bootstrap();
