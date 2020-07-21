@@ -14,7 +14,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   await app.listen(port, () => {
-    console.log(`${appName} docs http://${host}:${port}/${globalPrefix}`);
+    console.log(`${appName} is running on http://${host}:${port}/${globalPrefix}`);
   });
 }
 bootstrap();
