@@ -16,7 +16,7 @@
         "tsconfig-paths/register"
       ],
       // "runtimeVersion": "12.18.2",
-      "cwd": "${workspaceRoot}/server/auth-service",
+      "cwd": "${workspaceRoot}",
       "protocol": "inspector",
       "internalConsoleOptions": "openOnSessionStart",
       "sourceMaps": true,
@@ -37,6 +37,12 @@
       "restart": true,
       "address": "0.0.0.0",
       "skipFiles": ["<node_internals>/**"]
-    }
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}"
+    },
   ]
 }
