@@ -7,8 +7,8 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const appName = configService.get('APP_NAME');
-  const host = configService.get('HOST');
-  const port = configService.get('PORT');
+  const host = configService.get('SERVER_HOST');
+  const port = configService.get('SERVER_PORT');
   const version = configService.get('version');
   const globalPrefix = `api/${version}`;
   app.setGlobalPrefix(globalPrefix);

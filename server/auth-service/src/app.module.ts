@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
         POSTGRES_PORT: Joi.number().required(),
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required(),
-        POSTGRES_DB: Joi.string().required(),
+        POSTGRES_DB_NAME: Joi.string().required(),
       })      
     }),
     DatabaseModule,

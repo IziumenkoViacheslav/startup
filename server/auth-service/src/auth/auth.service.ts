@@ -2,14 +2,20 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import bcrypt from 'bcrypt';
 import CreateUserDto from '../user/dto/createUser.dto';
+import { User } from 'src/user/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(private readonly userService: UserService) { }
 
-  public async register(newUser: CreateUserDto): Promise<void> {
+  public async register(newUser: CreateUserDto): Promise<User> {
     const hashedPassword = await bcrypt.hash(newUser.password, 10);
-    const createdUser = await this.userService.create({ ...newUser, password: hashedPassword });
+    const createdUser = await this.userService.create({
+      ...newUser,
+      password: hashedPassword
+    });
+    createdUser.password = undefined;
+    return createdUser;
   }
 
   public async getAuthenticatedUser(email: string, plainTextPassword: string) {
@@ -24,12 +30,13 @@ export class AuthService {
   }
 
   private async verifyPassword(plainTextPassword: string, hashedPassword: string) {
-    const isPasswordMatching = await bcrypt.compare(
+    const isPasswordMatching: boolean = await bcrypt.compare(
       plainTextPassword,
       hashedPassword
     );
     if (!isPasswordMatching) {
       throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
     }
+    return isPasswordMatching;
   }
 }

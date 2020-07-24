@@ -22,7 +22,7 @@ import { GetPaymentsResolver } from './resolvers/get.payments.resolver';
           context: ({ req }) => ({ req }),
           introspection: true,
         };
-        if (process.env.NODE_ENV === 'dev') {
+        if (process.env.NODE_ENV === 'development') {
           options.cors = {
             origin: '*',
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',

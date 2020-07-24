@@ -1,20 +1,31 @@
-FROM node:14-alpine
+FROM node:14-alpine as development
 
 WORKDIR /usr/src/app
 
-ENV NODE_ENV dev
-
 COPY package*.json ./
 
-RUN npm install
-
-RUN npm i @nestjs/cli -g
+RUN npm install --only=development
 
 COPY . .
 
-EXPOSE 3001
+RUN npm run build
 
-CMD [ "npm", "run", "dev" ]
+FROM node:12.13-alpine as production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install --only=production
+
+COPY . .
+
+COPY --from=development /usr/src/app/dist ./dist
+
+CMD ["node", "dist/main"]
 
 
 

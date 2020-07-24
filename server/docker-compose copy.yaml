@@ -1,0 +1,84 @@
+version: '3'
+
+volumes:
+  # auth_service_db:
+  auth_pgdata:
+ 
+services:
+  redis:
+    container_name: redis-startup
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: ['redis-server', '--bind', 'redis', '--port', '6379']
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  # pgadmin:
+  #   links:
+  #   - postgres:postgres
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   ports:
+  #   - "8080:80"
+  #   volumes:
+  #   - /data/pgadmin:/root/.pgadmin
+  #   env_file:
+  #   - ./auth-service/.env.dev
+    # networks:
+    # - postgres
+
+  # auth-service:
+  #   build:
+  #     context: './auth-service'
+  #     # dockerfile: './identity-service/server/Dockerfile'
+  #   depends_on:
+  #     - auth-service-db
+  #   ports:
+  #     - '3001:3001'
+  #     - '9229:9229'
+  #   volumes:
+  #     - ./auth-service:/usr/src/app
+  #   env_file: 
+  #     - ./auth-service/.env.dev
+
+  # auth-service-db:
+  #   image: mysql:8.0.18
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_USER: admin
+  #     MYSQL_ROOT_PASSWORD: admin
+  #     MYSQL_USER: docker_user
+  #     MYSQL_DATABASE: auth_service_db
+  #   ports:
+  #     - '3002:3306'
+  #   volumes:
+  #     - auth_service_db:/var/lib/mysql
+    
+
+
+  postgres:
+    container_name: postgres-auth-db
+    image: postgres:12
+    env_file: 
+      - ./auth-service/.env.dev
+    environment:
+      # POSTGRES_USER: postgres
+      # POSTGRES_PASSWORD: postgres
+      # POSTGRES_DB: auth-db
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - auth_pgdata:/var/lib/postgresql/data
+
+ 
+
+
