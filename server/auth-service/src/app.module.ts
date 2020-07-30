@@ -7,7 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphqlFederationModule } from './graphql/graphql.module';
 import { GetPaymentsResolver } from './graphql/resolvers/get.payments.resolver';
 import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import { Auth0Module } from './auth0/auth0.module';
 
 @Module({
   imports: [
@@ -25,7 +25,7 @@ import { AuthModule } from './auth/auth.module';
     DatabaseModule,
     GraphqlFederationModule,
     UserModule,
-    AuthModule,
+    Auth0Module,
   ],
   controllers: [AppController],
   providers: [AppService, GetPaymentsResolver],
