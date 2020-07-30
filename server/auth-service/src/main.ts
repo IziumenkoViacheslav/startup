@@ -14,7 +14,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   await app.listen(port, () => {
-    console.log(`${appName} is running on http://${host}:${port}/${globalPrefix}`);
+    console.log(`${appName} NODE_ENV=${process.env.NODE_ENV} docs on http://${host}:${port}/${globalPrefix}`);
   });
 }
 bootstrap();
