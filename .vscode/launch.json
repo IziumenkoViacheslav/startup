@@ -16,6 +16,6 @@
       "restart": true,
       "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceFolder}/server/auth"
-    },
+    }
   ]
 }
